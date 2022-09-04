@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ArticleController!{% endblock %}
+
+{% block body %}
+    <div class="article">
+        <ul class="article-list">
+            {% for article in articles %}
+                <li class="article-navigation">
+                    <h2 class="article-navigation-title">{{ article.title }}</h2>
+                    <p class="article-content">{{ article.content }}</p>
+                    <div class="article-navigation-wrap">
+                        <span class="article-navigation-tag">{{ article.author.firstname }} {{ article.author.lastname }}</span> - <span class="article-navigation-tag">{{ article.updatedAt|date("m/d/Y", "Europe/Paris") }}</span>
+                    </div>
+                    <ul class="article-comment-list">
+                        {% for comment in article.comments %}
+                            <li class="article-comment-item">
+                                <p class="article-comment-content">{{ comment.content }}</p>
+                                <div class="article-comment-wrap">
+                                    <span class="article-navigation-tag">{{ comment.author.firstname }} {{ comment.author.lastname }}</span> - <span class="article-navigation-tag">{{ comment.updatedAt|date("m/d/Y", "Europe/Paris") }}</span>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

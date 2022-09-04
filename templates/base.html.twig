@@ -14,6 +14,24 @@
         {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        <header class="header">
+            <ul class="header-list">
+                <li class="header-item"><a href="{{ path('category_show') }}" class="header-navigation">Liste des catégories</a></li>
+                {% if not app.user %}
+                    <li class="header-item"><a href="{{ path('app_login') }}" class="header-navigation">Connexion</a></li>
+                    <li class="header-item"><a href="{{ path('app_register') }}" class="header-navigation">Inscription</a></li>
+                {% else %}
+                    <li class="header-item"><a href="{{ path('app_logout') }}" class="header-navigation">Déconnexion</a></li>
+                    <li class="header-item"><a href="" class="header-navigation">Profile</a></li>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <li class="header-item"><a href="{{ path('admin') }}" class="header-navigation">Admin</a></li>
+                    {% endif %}
+                {% endif %}
+            </ul>
+        </header>
+        <main id="main">
+            {% block body %}{% endblock %}
+        </main>
+        <footer id="footer"></footer>
     </body>
 </html>
